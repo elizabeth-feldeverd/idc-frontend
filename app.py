@@ -4,7 +4,6 @@ import numpy as np
 import requests
 import base64
 import tempfile
-from idc.processing import split
 import requests
 from streamlit_juxtapose import juxtapose
 import pathlib
@@ -49,16 +48,3 @@ if png:
     #     f"../{STREAMLIT_STATIC_PATH}/{IMG1}", f"../{STREAMLIT_STATIC_PATH}/{IMG2}"
     # )
     juxtapose(IMG1, IMG2)
-
-    if you_want:
-        url = "http://127.0.0.1:8000/predict"
-
-        # preprocessing
-        image = Image.open(png)
-        array_of_images = split(image)
-
-        bytes_image = base64.b64encode(array_of_images)
-
-        response = requests.post(url, data={"file": bytes_image})
-
-        print(type(response))
