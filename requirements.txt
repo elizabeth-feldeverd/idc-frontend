@@ -29,7 +29,7 @@ black
 # termcolor
 
 streamlit
-PIL
+Pillow
 requests
 pathlib
 random
