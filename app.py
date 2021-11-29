@@ -1,9 +1,6 @@
 import streamlit as st
 from PIL import Image
-import numpy as np
 import requests
-import base64
-import tempfile
 import requests
 from streamlit_juxtapose import juxtapose
 import pathlib
@@ -28,7 +25,7 @@ if png:
 
     # st.image(png)  # display image
 
-    url = "http://127.0.0.1:8000/annotate"
+    url = "https://idcimage-mvds5dflqq-ew.a.run.app/annotate"
     files = {"file": (png.name, png, "multipart/form-data")}
     response = requests.post(url, files=files)
 
