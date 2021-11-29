@@ -28,7 +28,7 @@ black
 # memoized-property
 # termcolor
 
-streamlit
+streamlit==0.75.0
 Pillow
 requests
 pathlib
