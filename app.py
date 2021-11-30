@@ -25,7 +25,8 @@ if png:
 
     # st.image(png)  # display image
 
-    url = "https://idcimage-mvds5dflqq-ew.a.run.app/annotate"
+    url = "http://127.0.0.1:8000/annotate"
+    # url = "https://idcimage-mvds5dflqq-ew.a.run.app/annotate"
     files = {"file": (png.name, png, "multipart/form-data")}
     response = requests.post(url, files=files)
 
