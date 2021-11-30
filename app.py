@@ -1,7 +1,6 @@
 import streamlit as st
 from PIL import Image
 import requests
-import requests
 from streamlit_juxtapose import juxtapose
 import pathlib
 from random import randrange
