@@ -8,7 +8,7 @@ import uuid
 
 
 st.write(
-    "Upload a breast cancer histology image, and see regions of interest highlighted"
+    "Upload a breast cancer histology image and see regions of interest highlighted"
 )
 
 STREAMLIT_STATIC_PATH = (
@@ -33,10 +33,10 @@ if png:
     # url = "http://127.0.0.1:8000/annotate"  # local
     url = "https://idc-mvds5dflqq-ew.a.run.app/annotate"  # production
     files = {"file": (png.name, png, "multipart/form-data")}
-    response = requests.post(url, files=files)
+    response = requests.post(url, files=files).json()
 
     # How to download image from url
-    IMG2 = response.json()["url"]
+    IMG2 = response["url"]
 
     # put a spinny wheel while waiting for the response
 
@@ -44,3 +44,19 @@ if png:
     original.save(STREAMLIT_STATIC_PATH / IMG1)  # this overwites
 
     juxtapose(IMG1, IMG2)
+
+    report = response["report"]
+
+    st.write(
+        f"""
+        The mean probability of IDC across the image is {report['mean_whole_slide']}%.\n
+        The percentage of high severity IDC regions across the image is {report['high_IDC_regions']}%.\n
+        The percentage of medium severity IDC regions across the image is {report['medium_IDC_regions']}%.\n
+        The percentage of low severity IDC regions across the image is {report['low_IDC_regions']}%.\n
+        The percentage of IDC-free regions across the image is {report['no_IDC_regions']}%.\n
+        """
+    )
+
+    recommendation = response["recommendation"]
+
+    st.write(recommendation)
