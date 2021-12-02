@@ -38,6 +38,10 @@ if png:
 
     juxtapose(IMG1, IMG2)
 
+    # display legend
+    legend = Image.open("legend.PNG")
+    st.image(legend, use_column_width=True)
+
     report = response["report"]
 
     st.write(
