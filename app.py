@@ -5,6 +5,8 @@ from streamlit_juxtapose import juxtapose
 import pathlib
 import uuid
 
+st.set_page_config(page_title="IDC", page_icon="🩺")
+
 STREAMLIT_STATIC_PATH = (
     pathlib.Path(st.__path__[0]) / "static"
 )  # at venv/lib/python3.9/site-packages/streamlit/static
@@ -48,7 +50,10 @@ if png:
     report = response["report"]
 
     # Severity metrics
-    st.markdown("<h4 style='text-align: left;'>Percentage of IDC severity across image</h4>", unsafe_allow_html=True)
+    st.markdown(
+        "<h4 style='text-align: left;'>Percentage of IDC severity across image</h4>",
+        unsafe_allow_html=True,
+    )
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("IDC-free", f"""{report['no_IDC_regions']}%""")
     col2.metric("Low Severity", f"""{report['low_IDC_regions']}%""")
