@@ -5,20 +5,20 @@ from streamlit_juxtapose import juxtapose
 import pathlib
 import uuid
 
-
-st.markdown(
-    """
-    # IDC Detection
-    #### Created by Jack Claar, Elizabeth Feldeverd, and Nadia Yap
-"""
-)
-
 STREAMLIT_STATIC_PATH = (
     pathlib.Path(st.__path__[0]) / "static"
 )  # at venv/lib/python3.9/site-packages/streamlit/static
 
 
-png = st.file_uploader("Upload a breast histology image (PNG format)", type=([".png"]))
+st.markdown(
+    """
+    # IDC Detection
+    *Created by Jack Claar, Elizabeth Feldeverd, and Nadia Yap*
+"""
+)
+
+
+png = st.file_uploader("Upload a breast cancer histology image", type=([".png"]))
 
 
 if png:

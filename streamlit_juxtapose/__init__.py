@@ -26,6 +26,7 @@ def juxtapose(img1: str, img2: str, height: int ):  # data
     """
         + js_block
         + """
+
         <div id="foo" style="width: 100%; """
         # + str(height)
         + '''px; margin: 1px;"></div>
