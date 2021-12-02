@@ -10,7 +10,6 @@ st.markdown(
     """
     # IDC Detection
     #### Created by Jack Claar, Elizabeth Feldeverd, and Nadia Yap
-    ### Upload a breast cancer histology image
 """
 )
 
@@ -19,7 +18,7 @@ STREAMLIT_STATIC_PATH = (
 )  # at venv/lib/python3.9/site-packages/streamlit/static
 
 
-png = st.file_uploader("Upload a PNG image", type=([".png"]))
+png = st.file_uploader("Upload a breast histology image (PNG format)", type=([".png"]))
 
 
 if png:
@@ -38,26 +37,24 @@ if png:
     # put a spinny wheel while waiting for the response
 
     original = Image.open(png)
+    width, height = original.size
+    height = 705 / width * height
     original.save(STREAMLIT_STATIC_PATH / IMG1)  # this overwites
-
-    juxtapose(IMG1, IMG2)
+    juxtapose(IMG1, IMG2, height)
 
     # display legend
     legend = Image.open("legend.PNG")
     st.image(legend, use_column_width=True)
-
     report = response["report"]
 
-    st.write(
-        f"""
-        The mean probability of IDC across the image is {report['mean_whole_slide']}%.\n
-        The percentage of high severity IDC regions across the image is {report['high_IDC_regions']}%.\n
-        The percentage of medium severity IDC regions across the image is {report['medium_IDC_regions']}%.\n
-        The percentage of low severity IDC regions across the image is {report['low_IDC_regions']}%.\n
-        The percentage of IDC-free regions across the image is {report['no_IDC_regions']}%.\n
-        """
-    )
+    # Severity metrics
+    st.markdown("<h4 style='text-align: left;'>Percentage of IDC severity across image</h4>", unsafe_allow_html=True)
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("IDC-free", f"""{report['no_IDC_regions']}%""")
+    col2.metric("Low Severity", f"""{report['low_IDC_regions']}%""")
+    col3.metric("Medium Severity", f"""{report['medium_IDC_regions']}%""")
+    col4.metric("High Severity", f"""{report['high_IDC_regions']}%""")
 
-    recommendation = response["recommendation"]
-
-    st.write(recommendation)
+    with st.expander("See recommendation"):
+        recommendation = response["recommendation"]
+        st.write(recommendation)
