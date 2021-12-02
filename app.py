@@ -5,6 +5,8 @@ from streamlit_juxtapose import juxtapose
 import pathlib
 import uuid
 
+st.set_page_config(page_title="IDC", page_icon="🩺")
+
 STREAMLIT_STATIC_PATH = (
     pathlib.Path(st.__path__[0]) / "static"
 )  # at venv/lib/python3.9/site-packages/streamlit/static
@@ -45,20 +47,19 @@ if png:
     # display legend
     legend = Image.open("legend.PNG")
     st.image(legend, use_column_width=True)
-
     report = response["report"]
 
+    # Severity metrics
     st.markdown(
-        f"""
-        - The percentage of high severity IDC regions across the image is {report['high_IDC_regions']}%.
-        - The percentage of medium severity IDC regions across the image is {report['medium_IDC_regions']}%.
-        - The percentage of low severity IDC regions across the image is {report['low_IDC_regions']}%.
-        - The percentage of IDC-free regions across the image is {report['no_IDC_regions']}%.
-        """
+        "<h4 style='text-align: left;'>Percentage of IDC severity across image</h4>",
+        unsafe_allow_html=True,
     )
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("IDC-free", f"""{report['no_IDC_regions']}%""")
+    col2.metric("Low Severity", f"""{report['low_IDC_regions']}%""")
+    col3.metric("Medium Severity", f"""{report['medium_IDC_regions']}%""")
+    col4.metric("High Severity", f"""{report['high_IDC_regions']}%""")
 
-    recommendation = response["recommendation"]
-
-    recom_html = f'<p style="color:Blue; font-size: 36px;">{recommendation}</p>'
-
-    st.markdown(recom_html, unsafe_allow_html=True)
+    with st.expander("See recommendation"):
+        recommendation = response["recommendation"]
+        st.write(recommendation)
