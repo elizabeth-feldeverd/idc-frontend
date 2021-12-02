@@ -50,7 +50,6 @@ if png:
 
     st.markdown(
         f"""
-        - The mean probability of IDC across the image is {report['mean_whole_slide']}%.
         - The percentage of high severity IDC regions across the image is {report['high_IDC_regions']}%.
         - The percentage of medium severity IDC regions across the image is {report['medium_IDC_regions']}%.
         - The percentage of low severity IDC regions across the image is {report['low_IDC_regions']}%.
