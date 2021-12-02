@@ -6,8 +6,12 @@ import pathlib
 import uuid
 
 
-st.write(
-    "Upload a breast cancer histology image and see regions of interest highlighted"
+st.markdown(
+    """
+    # IDC Detection
+    #### Created by Jack Claar, Elizabeth Feldeverd, and Nadia Yap
+    ### Upload a breast cancer histology image
+"""
 )
 
 STREAMLIT_STATIC_PATH = (
@@ -19,7 +23,7 @@ png = st.file_uploader("Upload a PNG image", type=([".png"]))
 
 
 if png:
-
+    # save png
     myuuid = uuid.uuid4()
     IMG1 = f"{myuuid}.png"
 
