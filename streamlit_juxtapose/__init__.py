@@ -27,7 +27,7 @@ def juxtapose(img1: str, img2: str, height: int = 1000):  # data
         + js_block
         + """
         <div id="foo" style="width: 95%; height: """
-        + str(height)
+        # + str(height)
         + '''px; margin: 1px;"></div>
         <script>
         slider = new juxtapose.JXSlider('#foo',

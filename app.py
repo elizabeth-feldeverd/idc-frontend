@@ -3,7 +3,6 @@ from PIL import Image
 import requests
 from streamlit_juxtapose import juxtapose
 import pathlib
-from random import randrange
 import uuid
 
 
@@ -16,16 +15,10 @@ STREAMLIT_STATIC_PATH = (
 )  # at venv/lib/python3.9/site-packages/streamlit/static
 
 
-you_want = False
-
 png = st.file_uploader("Upload a PNG image", type=([".png"]))
 
 
 if png:
-    # input = randrange(100, 1000, 2)
-    # output = input + 1
-
-    # IMG1 = f"img{input}.png"
 
     myuuid = uuid.uuid4()
     IMG1 = f"{myuuid}.png"
