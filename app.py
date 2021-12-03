@@ -5,7 +5,7 @@ from streamlit_juxtapose import juxtapose
 import pathlib
 import uuid
 
-st.set_page_config(page_title="IDC", page_icon="🩺")
+st.set_page_config(page_title="IDC Detection", page_icon="⚕️")
 
 STREAMLIT_STATIC_PATH = (
     pathlib.Path(st.__path__[0]) / "static"
